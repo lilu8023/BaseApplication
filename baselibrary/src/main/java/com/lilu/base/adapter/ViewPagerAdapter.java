@@ -28,6 +28,11 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         super(fm, behavior);
     }
 
+    public ViewPagerAdapter(@NonNull FragmentManager fm, int behavior,List<Fragment> fragments) {
+        super(fm, behavior);
+        this.fragmentList = fragments;
+    }
+
 
     //刷新fragment
     public void setFragments(FragmentManager fm, List<Fragment> fragments, List<String> mTitles) {

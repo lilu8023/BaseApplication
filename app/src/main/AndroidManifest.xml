@@ -16,6 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!--状态布局测试界面-->
+        <activity android:name=".function.statuslayout.StatusLayoutActivity"/>
+
     </application>
 
 </manifest>

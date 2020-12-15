@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--自定义NavigationBar采用ViewPager+fragment实现-->
+    <declare-styleable name="NavigationBar">
+        <!--底部导航栏高度-->
+        <attr name="navigationHeight" format="dimension" />
+        <!--底部导航栏背景-->
+        <attr name="navigationBackground" format="color" />
+        <!--Tab字体大小-->
+        <attr name="tabTextSize" format="dimension" />
+        <!--Tab文字距Tab图标的距离-->
+        <attr name="tabTextTop" format="dimension" />
+        <!--Tab图标大小-->
+        <attr name="tabIconSize" format="dimension" />
+        <!--Tab未选中字体颜色-->
+        <attr name="tabNormalColor" format="color" />
+        <!--Tab选中字体颜色-->
+        <attr name="tabSelectColor" format="color" />
+        <!--提示红点的大小-->
+        <attr name="hintPointSize" format="dimension" />
+        <!--消息红点的大小-->
+        <attr name="msgPointSize" format="dimension" />
+        <!--提示红点距Tab图标的距离-->
+        <attr name="hintPointLeft" format="dimension" />
+        <!--消息红点距Tab图标的距离-->
+        <attr name="msgPointLeft" format="dimension" />
+        <!--提示红点距离顶部的距离-->
+        <attr name="hintPointTop" format="dimension" />
+        <!--消息红点距顶部的距离-->
+        <attr name="msgPointTop" format="dimension" />
+        <!--消息红点数字字体大小-->
+        <attr name="msgPointTextSize" format="dimension" />
+
+        <!--消息红点99+的长度-->
+        <attr name="msgPointMoreWidth" format="dimension" />
+        <!--消息红点99+的高度-->
+        <attr name="msgPointMoreHeight" format="dimension" />
+        <!--消息红点99+的半径-->
+        <attr name="msgPointMoreRadius" format="integer" />
+        <!--消息红点的颜色-->
+        <attr name="msgPointColor" format="color" />
+
+
+        <!--分割线高度-->
+        <attr name="lineHeight" format="dimension" />
+        <!--分割线颜色-->
+        <attr name="lineColor" format="color" />
+
+        <!--是否有paddingBottom-->
+        <attr name="hasPadding" format="boolean" />
+
+
+        <!--中间图片的大小-->
+        <attr name="centerIconSize" format="dimension" />
+        <!--底部导航栏和加号的高度  加号会居中-->
+        <attr name="centerLayoutHeight" format="dimension" />
+        <!--添加按钮距离底部的距离-->
+        <attr name="centerLayoutBottomMargin" format="dimension" />
+        <!--图标显示-->
+        <attr name="scaleType">
+            <flag name="CENTER_INSIDE" value="0" />
+            <flag name="CENTER_CROP" value="1" />
+            <flag name="CENTER" value="2" />
+            <flag name="FIT_CENTER" value="3" />
+            <flag name="FIT_END" value="4" />
+            <flag name="FIT_START" value="5" />
+            <flag name="FIT_XY" value="6" />
+            <flag name="MATRIX" value="7" />
+        </attr>
+
+
+        <!--图标显示-->
+        <attr name="centerLayoutRule">
+            <flag name="RULE_CENTER" value="0" />
+            <flag name="RULE_BOTTOM" value="1" />
+        </attr>
+        <!-- true 点击加号切换fragment
+         false 点击加号不切换fragment进行其他操作（跳转界面等）-->
+        <attr name="centerAsFragment" format="boolean" />
+        <attr name="centerSelectTextColor" format="color" />
+        <attr name="centerNormalTextColor" format="color" />
+        <attr name="centerTextSize" format="dimension" />
+        <!--加号文字距离顶部加号的距离-->
+        <attr name="centerTextTopMargin" format="dimension" />
+        <!--是否和其他tab文字底部对齐-->
+        <attr name="centerAlignBottom" format="dimension" />
+        <!--文字大小单位DP还是SP-->
+        <attr name="textSizeType">
+            <flag name="TYPE_DP" value="1" />
+            <flag name="TYPE_SP" value="2" />
+        </attr>
+
+    </declare-styleable>
+
+
+    <declare-styleable name="Banner">
+        <attr name="banner_loop_time" format="integer" />
+        <attr name="banner_auto_loop" format="boolean" />
+        <attr name="banner_infinite_loop" format="boolean" />
+
+        <!--RoundLinesIndicator、RectangleIndicator-->
+        <attr name="banner_indicator_height" format="dimension" />
+        <attr name="banner_indicator_radius" format="dimension" />
+
+        <!-- 以下为公用属性 -->
+        <attr name="banner_indicator_selected_width" format="dimension" />
+        <!--CircleIndicator-->
+        <attr name="banner_indicator_normal_width" format="dimension" />
+        <attr name="banner_indicator_space" format="dimension" />
+
+        <attr name="banner_indicator_normal_color" format="reference|color" />
+        <attr name="banner_indicator_selected_color" format="reference|color" />
+        <attr name="banner_indicator_margin" format="dimension" />
+        <attr name="banner_indicator_marginLeft" format="dimension" />
+        <attr name="banner_indicator_marginTop" format="dimension" />
+        <attr name="banner_indicator_marginRight" format="dimension" />
+        <attr name="banner_indicator_marginBottom" format="dimension" />
+
+        <attr name="banner_indicator_gravity" format="enum">
+            <enum name="left" value="0" />
+            <enum name="center" value="1" />
+            <enum name="right" value="2" />
+        </attr>
+
+        <attr name="banner_orientation">
+            <enum name="horizontal" value="0" />
+            <enum name="vertical" value="1" />
+        </attr>
+        <attr name="banner_radius" format="dimension" />
+
+    </declare-styleable>
+
+</resources>

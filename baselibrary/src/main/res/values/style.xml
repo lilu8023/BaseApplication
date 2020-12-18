@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BaseNumberBar">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="max">100</item>
+        <item name="current">0</item>
+        <item name="unreached_color">#CCCCCC</item>
+        <item name="reached_color">#e94339</item>
+        <item name="text_size">12sp</item>
+        <item name="text_color">#e94339</item>
+        <item name="reached_bar_height">4dp</item>
+        <item name="unreached_bar_height">3dp</item>
+    </style>
+
+</resources>

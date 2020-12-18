@@ -47,6 +47,7 @@ dependencies {
     //动态权限请求工具
     implementation'com.yanzhenjie.permission:support:2.0.1'
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
+    implementation 'com.android.support:design:28.0.0'
 
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

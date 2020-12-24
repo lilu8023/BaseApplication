@@ -1,16 +1,10 @@
 package com.lilu.base.http;
 
-import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 
-import com.lilu.base.http.cache.RxCache;
-import com.lilu.base.http.cache.converter.IDiskConverter;
-import com.lilu.base.http.cache.converter.SerializableDiskConverter;
-import com.lilu.base.http.cache.model.CacheMode;
 import com.lilu.base.http.cookie.CookieManger;
 import com.lilu.base.http.utils.HttpsUtils;
-import com.lilu.base.http.utils.TransformerUtils;
 
 import org.apache.http.params.HttpParams;
 
@@ -23,9 +17,7 @@ import java.util.concurrent.TimeUnit;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLSession;
 
-import androidx.annotation.NonNull;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import okhttp3.Cache;
 import okhttp3.ConnectionPool;
 import okhttp3.Interceptor;
@@ -51,7 +43,6 @@ public class RxHttp {
     private static final int DEFAULT_RETRY_DELAY = 500;               //默认重试延时
     public static final int DEFAULT_CACHE_NEVER_EXPIRE = -1;          //缓存过期时间，默认永久缓存
     private Cache mCache = null;                                      //Okhttp缓存对象
-    private CacheMode mCacheMode = CacheMode.NO_CACHE;                //缓存类型
     private long mCacheTime = -1;                                     //缓存时间
     private File mCacheDirectory;                                     //缓存目录
     private long mCacheMaxSize;                                       //缓存大小
@@ -63,7 +54,6 @@ public class RxHttp {
     private HttpParams mCommonParams;                                 //全局公共请求参数
     private OkHttpClient.Builder okHttpClientBuilder;                 //okhttp请求的客户端
     private Retrofit.Builder retrofitBuilder;                         //Retrofit请求Builder
-    private RxCache.Builder rxCacheBuilder;                           //RxCache请求的Builder
     private CookieManger cookieJar;                                   //Cookie管理
     private volatile static RxHttp singleton = null;
 
@@ -75,9 +65,6 @@ public class RxHttp {
         okHttpClientBuilder.writeTimeout(DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS);
         retrofitBuilder = new Retrofit.Builder();
         retrofitBuilder.addCallAdapterFactory(RxJava2CallAdapterFactory.create());//增加RxJava2CallAdapterFactory
-        rxCacheBuilder = new RxCache.Builder()
-                .init(sContext)
-                .diskConverter(new SerializableDiskConverter());      //目前只支持Serializable和Gson缓存其它可以自己扩展
     }
 
     public static RxHttp getInstance() {
@@ -120,9 +107,6 @@ public class RxHttp {
         return getInstance().retrofitBuilder.build();
     }
 
-    public static RxCache getRxCache() {
-        return getInstance().rxCacheBuilder.build();
-    }
 
     /**
      * 对外暴露 OkHttpClient,方便自定义
@@ -138,12 +122,6 @@ public class RxHttp {
         return getInstance().retrofitBuilder;
     }
 
-    /**
-     * 对外暴露 RxCache,方便自定义
-     */
-    public static RxCache.Builder getRxCacheBuilder() {
-        return getInstance().rxCacheBuilder;
-    }
 
 
 
@@ -274,20 +252,6 @@ public class RxHttp {
         return getInstance().mRetryIncreaseDelay;
     }
 
-    /**
-     * 全局的缓存模式
-     */
-    public RxHttp setCacheMode(CacheMode cacheMode) {
-        mCacheMode = cacheMode;
-        return this;
-    }
-
-    /**
-     * 获取全局的缓存模式
-     */
-    public static CacheMode getCacheMode() {
-        return getInstance().mCacheMode;
-    }
 
     /**
      * 全局的缓存过期时间
@@ -320,24 +284,7 @@ public class RxHttp {
         return getInstance().mCacheMaxSize;
     }
 
-    /**
-     * 全局设置缓存的版本，默认为1，缓存的版本号
-     */
-    public RxHttp setCacheVersion(int cacheersion) {
-        if (cacheersion < 0)
-            throw new IllegalArgumentException("cacheersion must > 0");
-        rxCacheBuilder.appVersion(cacheersion);
-        return this;
-    }
 
-    /**
-     * 全局设置缓存的路径，默认是应用包下面的缓存
-     */
-    public RxHttp setCacheDirectory(File directory) {
-        mCacheDirectory = directory;
-        rxCacheBuilder.diskDir(directory);
-        return this;
-    }
 
     /**
      * 获取缓存的路劲
@@ -346,13 +293,6 @@ public class RxHttp {
         return getInstance().mCacheDirectory;
     }
 
-    /**
-     * 全局设置缓存的转换器
-     */
-    public RxHttp setCacheDiskConverter(IDiskConverter converter) {
-        rxCacheBuilder.diskConverter(converter);
-        return this;
-    }
 
     /**
      * 全局设置OkHttp的缓存,默认是3天
@@ -499,19 +439,4 @@ public class RxHttp {
         }
     }
 
-    /**
-     * 清空缓存
-     */
-    @SuppressLint("CheckResult")
-    public static void clearCache() {
-        getRxCache().clear().compose(TransformerUtils.<Boolean>io_main());
-    }
-
-    /**
-     * 移除缓存（key）
-     */
-    @SuppressLint("CheckResult")
-    public static void removeCache(String key) {
-        getRxCache().remove(key).compose(TransformerUtils.<Boolean>io_main());
-    }
 }

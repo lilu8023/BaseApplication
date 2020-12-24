@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/main_banner"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_150"
+        android:text="轮播图"
+        android:gravity="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/color_E94339"
+        />
+
+    <!-- 双排菜单 -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/main_menu_rv"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_banner"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

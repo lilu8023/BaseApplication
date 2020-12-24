@@ -5,8 +5,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.lilu.application.Constance;
 import com.lilu.application.R;
 import com.lilu.base.activity.BaseActivity;
+import com.lilu.base.utils.logger.Logger;
 import com.lilu.base.widget.statuslayout.callback.Callback;
 import com.lilu.base.widget.statuslayout.callback.EmptyCallback;
 import com.lilu.base.widget.statuslayout.callback.ErrorCallback;
@@ -22,24 +25,27 @@ import androidx.annotation.NonNull;
  * @author lilu on 2020/12/15
  * No one knows this better than me
  */
+@Route(path = Constance.ACTIVITY_STATUS)
 public class StatusLayoutActivity extends BaseActivity {
 
-    LoadService status;
 
     @Override
     protected int getContentView() {
-        return 0;
+        return R.layout.activity_status;
     }
 
     @Override
     protected void init(Bundle savedInstanceState) {
 
-        status = LoadSir.getDefault().register(this, new Callback.OnReloadListener() {
-            @Override
-            public void onReload(View v) {
+        setTitle("各种状态");
 
-            }
-        });
+    }
+
+    @Override
+    protected void onErrorReload() {
+        super.onErrorReload();
+
+        Logger.i("重新加载数据");
     }
 
     @Override
@@ -56,19 +62,19 @@ public class StatusLayoutActivity extends BaseActivity {
         switch (item.getItemId()){
 
             case R.id.status_loading:
-                status.showCallback(LoadingCallback.class);
+                showLoading();
                 break;
 
             case R.id.status_empty:
-                status.showCallback(EmptyCallback.class);
+                showEmpty();
                 break;
 
             case R.id.status_error:
-                status.showCallback(ErrorCallback.class);
+                showError();
                 break;
 
             case R.id.status_success:
-                status.showSuccess();
+                showSuccess();
                 break;
 
         }

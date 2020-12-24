@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 //表示此model支持kotlin
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-
+apply plugin: 'kotlin-kapt'
 android {
 
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
@@ -15,6 +15,12 @@ android {
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode rootProject.ext.android["versionCode"]
         versionName rootProject.ext.android["versionName"]
+
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+            }
+        }
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -44,5 +50,7 @@ dependencies {
 
     //转载基本架构
     implementation project(path: ':baselibrary')
+
+    kapt 'com.alibaba:arouter-compiler:1.5.1'
 
 }

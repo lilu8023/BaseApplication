@@ -3,6 +3,8 @@ package com.lilu.base.widget.statuslayout.callback;
 import android.content.Context;
 import android.view.View;
 
+import com.lilu.base.R;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
@@ -57,6 +59,9 @@ public abstract class Callback implements Serializable {
                     return;
                 }
                 if (onReloadListener != null) {
+                    if(R.layout.layout_empty == resId){
+
+                    }
                     onReloadListener.onReload(v);
                 }
             }
@@ -120,7 +125,10 @@ public abstract class Callback implements Serializable {
     }
 
     public interface OnReloadListener extends Serializable {
+
         void onReload(View v);
+
+
     }
 
     protected abstract int onCreateView();

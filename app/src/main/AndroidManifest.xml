@@ -3,6 +3,7 @@
     package="com.lilu.application">
 
     <application
+        android:name=".MainApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -19,6 +20,9 @@
 
         <!--状态布局测试界面-->
         <activity android:name=".function.statuslayout.StatusLayoutActivity"/>
+
+        <!-- 通知适配测试界面 -->
+        <activity android:name=".function.notify.NotificationActivity"/>
 
     </application>
 

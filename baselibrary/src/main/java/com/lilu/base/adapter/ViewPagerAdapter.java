@@ -24,6 +24,11 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     List<Fragment> fragmentList = new ArrayList<>();
     private List<String> mTitles;
 
+    /**
+     *
+     * @param fm
+     * @param behavior BEHAVIOR_SET_USER_VISIBLE_HINT  &  BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
+     */
     public ViewPagerAdapter(@NonNull FragmentManager fm, int behavior) {
         super(fm, behavior);
     }

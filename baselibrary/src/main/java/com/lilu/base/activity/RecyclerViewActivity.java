@@ -26,7 +26,7 @@ public abstract class RecyclerViewActivity extends BaseActivity {
     RecyclerView base_rv;
 
 
-    public abstract RecyclerView.Adapter initAdapter();
+    public abstract void setAdapter(RecyclerView baseRv);
 
 
     /**
@@ -57,7 +57,7 @@ public abstract class RecyclerViewActivity extends BaseActivity {
         //设置列表的排列顺序
         base_rv.setLayoutManager(getLayoutManager());
         //设置适配器
-        base_rv.setAdapter(initAdapter());
+        setAdapter(base_rv);
 
         initRefreshLayout(base_srl);
     }

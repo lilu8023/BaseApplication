@@ -1,17 +1,13 @@
 package com.lilu.application.function.notify;
 
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.lilu.application.R;
 
-import java.util.List;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.recyclerview.widget.RecyclerView;
+import java.util.List;
 
 /**
  * Description:
@@ -19,43 +15,18 @@ import androidx.recyclerview.widget.RecyclerView;
  * @author lilu on 2020/12/22
  * No one knows this better than me
  */
-public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.NotificationViewHolder> {
+public class NotificationAdapter extends BaseQuickAdapter<NotifyEntity, BaseViewHolder> {
 
-    private Context mContext;
-    private List<String> mList;
 
-    public NotificationAdapter(Context context, List<String> list) {
-        this.mContext = context;
-        this.mList = list;
-    }
-
-    @NonNull
-    @Override
-    public NotificationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        View itemView = LayoutInflater.from(mContext).inflate(R.layout.item_notification,parent,false);
-        return new NotificationViewHolder(itemView);
+    public NotificationAdapter(@Nullable List<NotifyEntity> data) {
+        super(R.layout.item_notification, data);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NotificationViewHolder holder, int position) {
+    protected void convert(@NotNull BaseViewHolder baseViewHolder, NotifyEntity item) {
 
-        holder.item_notify_bt.setText(mList.get(position));
+        baseViewHolder.setText(R.id.item_notify_title_tv,item.getTitle());
+        baseViewHolder.setText(R.id.item_notify_content_tv,item.getContent());
 
-    }
-
-    @Override
-    public int getItemCount() {
-        return mList.size();
-    }
-
-    public class NotificationViewHolder extends RecyclerView.ViewHolder{
-
-        AppCompatButton item_notify_bt;
-        public NotificationViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            item_notify_bt = itemView.findViewById(R.id.item_notify_bt);
-        }
     }
 }

@@ -24,6 +24,8 @@
         <!-- 通知适配测试界面 -->
         <activity android:name=".function.notify.NotificationActivity"/>
 
+        <activity android:name=".function.notify.ImportantActivity"/>
+        <receiver android:name=".function.notify.NotifyReceiver"/>
     </application>
 
 </manifest>

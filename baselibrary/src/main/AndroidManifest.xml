@@ -37,7 +37,7 @@
 
         <!-- Android 7.0 外置存储适配 -->
         <provider
-            android:name=".BaseFileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.updateFileProvider"
             android:exported="false"
             android:grantUriPermissions="true">

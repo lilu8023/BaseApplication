@@ -43,7 +43,7 @@ import static com.lilu.base.utils.notification.NotificationUtils.LEVEL4;
  * @author lilu on 2020/12/15
  * No one knows this better than me
  */
-@Route(path = Constance.ACTIVITY_NOTIFY)
+@Route(path = Constance.ACTIVITY_NOTIFY ,extras = 0)
 public class NotificationActivity extends RecyclerViewActivity {
 
 
@@ -256,7 +256,6 @@ public class NotificationActivity extends RecyclerViewActivity {
         super.init(savedInstanceState);
 
         setTitle("通知适配");
-
 
     }
 }

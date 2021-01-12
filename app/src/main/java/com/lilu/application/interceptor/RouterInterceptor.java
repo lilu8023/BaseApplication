@@ -1,6 +1,7 @@
 package com.lilu.application.interceptor;
 
 import android.content.Context;
+import android.os.Bundle;
 
 import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.facade.annotation.Interceptor;
@@ -20,8 +21,7 @@ public class RouterInterceptor implements IInterceptor {
     @Override
     public void process(Postcard postcard, InterceptorCallback callback) {
 
-
-        Logger.i(postcard.getPath());
+        Logger.i("i="+postcard.getExtra());
         callback.onContinue(postcard);
     }
 

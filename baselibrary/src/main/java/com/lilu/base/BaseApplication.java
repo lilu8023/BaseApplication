@@ -3,12 +3,12 @@ package com.lilu.base;
 import android.app.Application;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.kingja.loadsir.callback.SuccessCallback;
+import com.kingja.loadsir.core.LoadSir;
 import com.lilu.base.update.VersionUpdate;
-import com.lilu.base.widget.statuslayout.callback.EmptyCallback;
-import com.lilu.base.widget.statuslayout.callback.ErrorCallback;
-import com.lilu.base.widget.statuslayout.callback.LoadingCallback;
-import com.lilu.base.widget.statuslayout.callback.SuccessCallback;
-import com.lilu.base.widget.statuslayout.core.LoadSir;
+import com.lilu.base.widget.statuslayout.EmptyCallback;
+import com.lilu.base.widget.statuslayout.ErrorCallback;
+import com.lilu.base.widget.statuslayout.LoadingCallback;
 
 /**
  * Description:
@@ -28,13 +28,14 @@ public class BaseApplication extends Application {
         }
         ARouter.init(this); // 尽可能早，推荐在Application中初始化
 
+        VersionUpdate.get().setApkCacheDir("ddd").init(this);
+
         LoadSir.beginBuilder()
+                .addCallback(new LoadingCallback())
                 .addCallback(new EmptyCallback())
                 .addCallback(new ErrorCallback())
-                .addCallback(new LoadingCallback())
                 .setDefaultCallback(SuccessCallback.class)
                 .commit();
 
-        VersionUpdate.get().setApkCacheDir("ddd").init(this);
     }
 }

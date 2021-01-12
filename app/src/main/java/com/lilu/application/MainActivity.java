@@ -13,6 +13,7 @@ import com.lilu.application.function.main.MineFragment;
 import com.lilu.application.function.main.SocialFragment;
 import com.lilu.base.activity.BaseActivity;
 import com.lilu.base.adapter.ViewPagerAdapter;
+import com.lilu.base.utils.logger.Logger;
 import com.lilu.base.widget.bottomnavigation.NavigationBar;
 
 import java.util.ArrayList;

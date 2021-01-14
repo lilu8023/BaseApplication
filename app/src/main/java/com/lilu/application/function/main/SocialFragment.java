@@ -7,6 +7,12 @@ import android.view.ViewGroup;
 
 import com.lilu.application.R;
 import com.lilu.base.update.VersionUpdate;
+import com.lilu.base.update.entity.PromptEntity;
+import com.lilu.base.update.entity.UpdateEntity;
+import com.lilu.base.update.proxy.IUpdateChecker;
+import com.lilu.base.update.proxy.IUpdatePrompter;
+import com.lilu.base.update.proxy.IUpdateProxy;
+import com.lilu.base.update.proxy.impl.DefaultUpdateChecker;
 import com.lilu.base.utils.logger.Logger;
 
 import androidx.annotation.NonNull;
@@ -32,6 +38,23 @@ public class SocialFragment extends TestFragment {
     public void loadData() {
         Logger.i("SocialFragment 进行了懒加载");
 
-        VersionUpdate.newBuild(getActivity()).update();
+        VersionUpdate.newBuild(getActivity())
+                .update();
+
+
+//        VersionUpdate.newBuild(getActivity())
+//                .updateChecker(new DefaultUpdateChecker(){
+//                    @Override
+//                    public void noNewVersion(Throwable throwable) {
+//                        super.noNewVersion(throwable);
+//                        Logger.i("暂无新版本");
+//                    }
+//                })
+//                .updatePrompter(new IUpdatePrompter() {
+//                    @Override
+//                    public void showPrompt(@NonNull UpdateEntity updateEntity, @NonNull IUpdateProxy updateProxy, @NonNull PromptEntity promptEntity) {
+//                        Logger.i("要显示了");
+//                    }
+//                }).update();
     }
 }

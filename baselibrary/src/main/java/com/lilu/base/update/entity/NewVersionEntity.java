@@ -1,32 +1,12 @@
-/*
- * Copyright (C) 2018 xuexiangjys(xuexiangjys@163.com)
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.lilu.base.update.entity;
 
 /**
- * 版本更新检查返回的结果
- *
- * 0:无版本更新
- * 1:有版本更新，不需要强制升级
- * 2:有版本更新，需要强制升级
- *
- * @author xuexiang
- * @since 2018/7/5 下午5:34
+ * Description:
+ * 版本更新实体类
+ * @author lilu on 2020/12/14
+ * No one knows this better than me
  */
-public class CheckVersionResult {
+public class NewVersionEntity {
     /**
      * 无版本更新
      */
@@ -85,7 +65,7 @@ public class CheckVersionResult {
         return Code;
     }
 
-    public CheckVersionResult setCode(int code) {
+    public NewVersionEntity setCode(int code) {
         Code = code;
         return this;
     }
@@ -94,7 +74,7 @@ public class CheckVersionResult {
         return Msg;
     }
 
-    public CheckVersionResult setMsg(String msg) {
+    public NewVersionEntity setMsg(String msg) {
         Msg = msg;
         return this;
     }
@@ -103,7 +83,7 @@ public class CheckVersionResult {
         return UpdateStatus;
     }
 
-    public CheckVersionResult setRequireUpgrade(int updateStatus) {
+    public NewVersionEntity setRequireUpgrade(int updateStatus) {
         UpdateStatus = updateStatus;
         return this;
     }
@@ -112,7 +92,7 @@ public class CheckVersionResult {
         return UploadTime;
     }
 
-    public CheckVersionResult setUploadTime(String uploadTime) {
+    public NewVersionEntity setUploadTime(String uploadTime) {
         UploadTime = uploadTime;
         return this;
     }
@@ -121,7 +101,7 @@ public class CheckVersionResult {
         return VersionCode;
     }
 
-    public CheckVersionResult setVersionCode(int versionCode) {
+    public NewVersionEntity setVersionCode(int versionCode) {
         VersionCode = versionCode;
         return this;
     }
@@ -130,7 +110,7 @@ public class CheckVersionResult {
         return VersionName;
     }
 
-    public CheckVersionResult setVersionName(String versionName) {
+    public NewVersionEntity setVersionName(String versionName) {
         VersionName = versionName;
         return this;
     }
@@ -139,7 +119,7 @@ public class CheckVersionResult {
         return ModifyContent;
     }
 
-    public CheckVersionResult setModifyContent(String modifyContent) {
+    public NewVersionEntity setModifyContent(String modifyContent) {
         ModifyContent = modifyContent;
         return this;
     }
@@ -148,7 +128,7 @@ public class CheckVersionResult {
         return DownloadUrl;
     }
 
-    public CheckVersionResult setDownloadUrl(String downloadUrl) {
+    public NewVersionEntity setDownloadUrl(String downloadUrl) {
         DownloadUrl = downloadUrl;
         return this;
     }
@@ -157,7 +137,7 @@ public class CheckVersionResult {
         return ApkMd5;
     }
 
-    public CheckVersionResult setApkMd5(String apkMd5) {
+    public NewVersionEntity setApkMd5(String apkMd5) {
         ApkMd5 = apkMd5;
         return this;
     }
@@ -166,7 +146,7 @@ public class CheckVersionResult {
         return ApkSize;
     }
 
-    public CheckVersionResult setApkSize(long apkSize) {
+    public NewVersionEntity setApkSize(long apkSize) {
         ApkSize = apkSize;
         return this;
     }

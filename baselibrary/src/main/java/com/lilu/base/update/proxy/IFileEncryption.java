@@ -3,16 +3,15 @@ package com.lilu.base.update.proxy;
 import java.io.File;
 
 /**
+ * Description:
  * 文件加密器，用于文件有效性校验
- *
- * @author xuexiang
- * @since 2019-09-06 14:15
+ * @author lilu on 2020/12/14
+ * No one knows this better than me
  */
 public interface IFileEncryption {
 
     /**
      * 加密文件
-     *
      * @param file
      * @return
      */

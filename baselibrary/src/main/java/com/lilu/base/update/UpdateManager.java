@@ -1,10 +1,11 @@
 package com.lilu.base.update;
 
 import android.content.Context;
+import android.text.TextUtils;
 
+import com.lilu.base.update.entity.NewVersionEntity;
 import com.lilu.base.update.entity.PromptEntity;
 import com.lilu.base.update.entity.UpdateEntity;
-import com.lilu.base.update.listener.IUpdateParseCallback;
 import com.lilu.base.update.proxy.IUpdateChecker;
 import com.lilu.base.update.proxy.IUpdateDownloader;
 import com.lilu.base.update.proxy.IUpdateHttpService;
@@ -24,6 +25,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
+import static com.lilu.base.update.entity.UpdateError.ERROR.CHECK_APK_CACHE_DIR_EMPTY;
+import static com.lilu.base.update.entity.UpdateError.ERROR.CHECK_IGNORED_VERSION;
 import static com.lilu.base.update.entity.UpdateError.ERROR.PROMPT_ACTIVITY_DESTROY;
 
 /**
@@ -113,10 +116,8 @@ public class UpdateManager implements IUpdateProxy {
      */
     @Override
     public void update() {
-        Logger.d("XUpdate.update()启动:" + toString());
-
-        //
-        checkVersion();
+//        checkVersion();
+        onBeforeCheck();
     }
 
 
@@ -125,37 +126,34 @@ public class UpdateManager implements IUpdateProxy {
      */
     @Override
     public void onBeforeCheck() {
-        mIUpdateChecker.onBeforeCheck();
-    }
-
-    /**
-     * 执行网络请求，检查应用的版本信息
-     */
-    @Override
-    public void checkVersion() {
-        Logger.d("开始检查版本信息...");
-        mIUpdateChecker.checkVersion(this);
-    }
-
-    /**
-     * 版本检查之后
-     */
-    @Override
-    public void onAfterCheck() {
-        mIUpdateChecker.onAfterCheck();
+        mIUpdateChecker.onBeforeCheck(this);
     }
 
 
+
     @Override
-    public void parseJson(@NonNull String json, final IUpdateParseCallback callback) throws Exception {
-        Logger.i("服务端返回的最新版本信息:" + json);
-        mIUpdateParser.parseJson(json, new IUpdateParseCallback() {
-            @Override
-            public void onParseResult(UpdateEntity updateEntity) {
-                mUpdateEntity = refreshParams(updateEntity);
-                callback.onParseResult(updateEntity);
+    public void  entityParse(@NonNull NewVersionEntity version) {
+        mUpdateEntity = mIUpdateParser.entityParse(version);
+        if (mUpdateEntity != null) {
+            mUpdateEntity.setApkCacheDir(mApkCacheDir);
+            mUpdateEntity.setIUpdateHttpService(mIUpdateHttpService);
+
+            if (mUpdateEntity.isHasUpdate()) {
+                //校验是否是已忽略版本
+                if (UpdateUtils.isIgnoreVersion(getContext(), mUpdateEntity.getVersionName())) {
+                    VersionHelper.onUpdateError(CHECK_IGNORED_VERSION);
+                    //校验apk下载缓存目录是否为空
+                } else if (TextUtils.isEmpty(mUpdateEntity.getApkCacheDir())) {
+                    VersionHelper.onUpdateError(CHECK_APK_CACHE_DIR_EMPTY);
+                } else {
+                    findNewVersion(mUpdateEntity, this);
+                }
+            } else {
+                noNewVersion(null);
             }
-        });
+        }else{
+            VersionHelper.onUpdateError(CHECK_APK_CACHE_DIR_EMPTY);
+        }
     }
 
     /**
@@ -165,10 +163,7 @@ public class UpdateManager implements IUpdateProxy {
      */
     private UpdateEntity refreshParams(UpdateEntity updateEntity) {
         //更新信息（本地信息）
-        if (updateEntity != null) {
-            updateEntity.setApkCacheDir(mApkCacheDir);
-            updateEntity.setIUpdateHttpService(mIUpdateHttpService);
-        }
+
         return updateEntity;
     }
 

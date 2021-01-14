@@ -2,8 +2,8 @@ package com.lilu.base.update.proxy;
 
 import android.content.Context;
 
+import com.lilu.base.update.entity.NewVersionEntity;
 import com.lilu.base.update.entity.UpdateEntity;
-import com.lilu.base.update.listener.IUpdateParseCallback;
 import com.lilu.base.update.service.OnFileDownloadListener;
 
 import androidx.annotation.NonNull;
@@ -45,15 +45,6 @@ public interface IUpdateProxy {
      */
     void onBeforeCheck();
 
-    /**
-     * 执行网络请求，检查应用的版本信息
-     */
-    void checkVersion();
-
-    /**
-     * 版本检查之后
-     */
-    void onAfterCheck();
 
     /**
      * 发现新版本
@@ -73,13 +64,7 @@ public interface IUpdateProxy {
     //=============IParserProxy================//
 
 
-    /**
-     * 将请求的json结果解析为版本更新信息实体【异步方法】
-     *
-     * @param json     请求的json数据
-     * @param callback 解析回调
-     */
-    void parseJson(@NonNull String json, final IUpdateParseCallback callback) throws Exception;
+    void entityParse(@NonNull NewVersionEntity version);
 
     //=============IPrompterProxy================//
 
